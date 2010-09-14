@@ -1,13 +1,28 @@
 module Redline
   module Base
-    
-    def self.included(model)
-      model.extend(ClassMethods)
+    module Object
+      
+      def self.included(model)
+        model.extend(ClassMethods)
+      end
+      module ClassMethods
+        def redline(field_name)
+          define_method field_name.to_sym do
+            Redline::Timeline::Object.new field_name.to_sym, self
+          end
+        end
+      end
     end
-    module ClassMethods
-      def redline(field_name)
-        define_method field_name.to_sym do
-          Redline::Timeline.new field_name.to_sym, self.class.to_s, self.id
+    
+    module User
+      def self.included(model)
+        model.extend(ClassMethods)
+      end
+      module ClassMethods
+        def redline(field_name)
+          define_method field_name.to_sym do
+            Redline::Timeline::User.new field_name.to_sym, self
+          end
         end
       end
     end

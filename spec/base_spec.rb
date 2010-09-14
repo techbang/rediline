@@ -1,20 +1,24 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-class TestingModel
-  include Redline::Base
-  redline  :timeline
+describe Redline::Base do
   
-  def id
-    1
+  describe 'object' do
+    it 'should have the timeline method' do
+      TestingTimelineObject.new(1).respond_to?(:timeline).should eql(true)
+    end
+    it 'should return a timeline object' do
+      TestingTimelineObject.new(1).timeline.should be_kind_of(Redline::Timeline::Object)
+    end
   end
-end
-describe Redline::Entry do
   
-  it 'should have the timeline method' do
-    TestingModel.new.respond_to?(:timeline).should eql(true)
-  end
-  it 'should return a timeline object' do
-    TestingModel.new.timeline.should be_kind_of(Redline::Timeline)
+  describe 'user' do
+    it 'should have the timeline method' do
+      User.new(1).respond_to?(:timeline).should eql(true)
+    end
+    
+    it 'should return a timeline object' do
+      User.new(1).timeline.should be_kind_of(Redline::Timeline::User)
+    end
   end
 end
