@@ -10,7 +10,7 @@ module Redline
     def initialize(string)
       @content = string.is_a?(String) ? parse(string) : string.stringify_keys!
       
-      @user_object = @content['user_object'].nil? ? User : @content['user_object'].constantize
+      @user_object = @content['user_object'].nil? ? User : @content['user_object'].to_s.constantize
       [:object_type, :object_id, :user_id].each do |f|
         raise "invalid content : missing field #{f}" if content[f.to_s].nil?
         instance_eval "@#{f.to_s} = #{content[f.to_s]}"
