@@ -55,7 +55,7 @@ describe Redline::Entry do
       entry.to_json.should be_kind_of(String)
       json = JSON.parse(entry.to_json)
       valid_json.each_pair do |k, v|
-        valid_json[k].should eql(json[k.to_s])
+        valid_json[k].to_s.should eql(json[k.to_s])
       end
     end
   end

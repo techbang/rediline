@@ -31,7 +31,7 @@ module Redline
           raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
           instance_eval "@#{f.to_s} = string.delete('#{f.to_s}')"
           instance_eval "string['#{f.to_s}_object'] = @#{f.to_s}.class.to_s"
-          instance_eval "string['#{f.to_s}_id'] = @#{f.to_s}.id"
+          instance_eval "string['#{f.to_s}_id'] = @#{f.to_s}.id.to_s"
         end
       end
       
