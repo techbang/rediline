@@ -1,5 +1,5 @@
 class TestingTimelineObject
-  include Redline::Base::Object
+  include Redline::Object
   redline :timeline
   
   attr_reader   :id

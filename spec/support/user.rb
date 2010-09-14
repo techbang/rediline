@@ -1,5 +1,5 @@
 class User
-  include Redline::Base::User
+  include Redline::User
   redline :timeline
   
   attr_reader   :id
