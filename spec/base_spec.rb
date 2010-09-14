@@ -4,6 +4,10 @@ require 'spec_helper'
 class TestingModel
   include Redline::Base
   redline  :timeline
+  
+  def id
+    1
+  end
 end
 describe Redline::Entry do
   

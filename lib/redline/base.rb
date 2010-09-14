@@ -7,7 +7,7 @@ module Redline
     module ClassMethods
       def redline(field_name)
         define_method field_name.to_sym do
-          Redline::Timeline.new
+          Redline::Timeline.new field_name.to_sym, self.class.to_s, self.id
         end
       end
     end
