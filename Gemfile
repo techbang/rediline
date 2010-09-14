@@ -6,6 +6,10 @@ gem "json"
 gem "i18n"
 gem "activesupport", "3.0.0"
 
+group :development do
+  gem "jeweler"
+end
+
 group :test do
   gem "rspec", '~> 2.0.0.beta'
   gem "rspec-rails", '~> 2.0.0.beta'
