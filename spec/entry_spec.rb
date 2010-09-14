@@ -75,6 +75,13 @@ describe Redline::Entry do
     end
   end
   
+  describe 'to_json' do
+    it 'should return the attributes in json' do
+      entry = Redline::Entry.new valid_content
+      entry.to_json.should eql(valid_content.to_json)
+    end
+  end
+  
   def valid_content
     {
       :object_type => "TestingRedlineEntry",

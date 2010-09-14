@@ -24,6 +24,10 @@ module Redline
       @user ||= user_object.find(user_id)
     end
     
+    def to_json
+      @content.to_json
+    end
+    
     private
     def parse(string)
       JSON.parse(string)
