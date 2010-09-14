@@ -5,12 +5,13 @@ module Redline
   
   class Entry
     attr_reader   :content
-    attr_reader   :object_type, :object_id
+    attr_reader   :object_type, :object_id, :user_object, :user_id
     
     def initialize(string)
       @content = string.is_a?(String) ? parse(string) : string.stringify_keys!
       
-      [:object_type, :object_id].each do |f|
+      @user_object = @content['user_object'].nil? ? User : @content['user_object'].constantize
+      [:object_type, :object_id, :user_id].each do |f|
         raise "invalid content : missing field #{f}" if content[f.to_s].nil?
         instance_eval "@#{f.to_s} = #{content[f.to_s]}"
       end
@@ -18,6 +19,9 @@ module Redline
     
     def object
       @object ||= object_type.find(object_id)
+    end
+    def user
+      @user ||= user_object.find(user_id)
     end
     
     private
