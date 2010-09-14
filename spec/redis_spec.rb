@@ -45,7 +45,7 @@ describe Redline do
     
     it 'should not know what to do with that' do
       lambda do
-        Redline.redis = Dmathieu::Redis
+        Redline.redis = Redline::Redis
       end.should raise_error
     end
   end
