@@ -48,7 +48,7 @@ describe Redline::Entry do
     end
     it 'should define a specified user_object' do
       entry = Redline::Entry.new valid_content
-      entry.user_object.new.should be_kind_of(TestingRedlineEntry)
+      entry.user_object.should eql('TestingRedlineEntry')
     end
   end
   
