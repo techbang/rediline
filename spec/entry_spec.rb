@@ -18,6 +18,12 @@ describe Redline::Entry do
     end.should_not raise_error
   end
   
+  it 'should initialize with a hash' do
+    lambda do
+      Redline::Entry.new valid_content
+    end.should_not raise_error
+  end
+  
   [:object_type, :object_id].each do |f|
     it "should require a #{f}" do
       c = valid_content

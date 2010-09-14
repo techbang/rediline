@@ -7,7 +7,7 @@ module Redline
     attr_reader   :object_type, :object_id
     
     def initialize(string)
-      @content = parse(string)
+      @content = string.is_a?(String) ? parse(string) : stringify_keys!(string)
       
       [:object_type, :object_id].each do |f|
         raise "invalid content : missing field #{f}" if content[f.to_s].nil?
@@ -22,6 +22,13 @@ module Redline
     private
     def parse(string)
       JSON.parse(string)
+    end
+    
+    def stringify_keys!(hash)
+      hash.keys.each do |key|
+        hash[key.to_s] = hash.delete(key)
+      end
+      hash
     end
   end
 end
