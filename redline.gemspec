@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "Gemfile.lock",
      "README.md",
      "Rakefile",
+     "VERSION",
      "init.rb",
      "lib/redline.rb",
      "lib/redline/entry.rb",
@@ -31,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/redline/timeline/object.rb",
      "lib/redline/timeline/user.rb",
      "lib/redline/user.rb",
+     "redline.gemspec",
      "spec/entry_spec.rb",
      "spec/object_spec.rb",
      "spec/redis_spec.rb",
@@ -65,9 +67,24 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<redis>, ["= 2.0.7"])
+      s.add_runtime_dependency(%q<redis-namespace>, ["= 0.10.0"])
+      s.add_runtime_dependency(%q<json>, [">= 0"])
+      s.add_runtime_dependency(%q<i18n>, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>, ["= 3.0.0"])
     else
+      s.add_dependency(%q<redis>, ["= 2.0.7"])
+      s.add_dependency(%q<redis-namespace>, ["= 0.10.0"])
+      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<i18n>, [">= 0"])
+      s.add_dependency(%q<activesupport>, ["= 3.0.0"])
     end
   else
+    s.add_dependency(%q<redis>, ["= 2.0.7"])
+    s.add_dependency(%q<redis-namespace>, ["= 0.10.0"])
+    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<i18n>, [">= 0"])
+    s.add_dependency(%q<activesupport>, ["= 3.0.0"])
   end
 end
 
