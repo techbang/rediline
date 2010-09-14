@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem "redis", '2.0.7'
 gem "redis-namespace", '0.10.0'
+gem "json"
 
 group :test do
   gem "rspec", '~> 2.0.0.beta'

@@ -2,6 +2,7 @@
 
 require 'redis/namespace'
 require 'redline/redis'
+require 'redline/entry'
 
 module Redline
   extend Redline::Redis
