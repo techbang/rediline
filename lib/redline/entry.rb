@@ -37,14 +37,15 @@ module Redline
       if string.is_a?(String)
         string = JSON.parse(string)
         
-        [:user_id, :user_object, :object_id, :object_object].each do |f|
+        [:user_id, :user_object, :object_id, :object_object, :verb].each do |f|
           raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
         end
       else
         string.stringify_keys!
         
-        [:user, :object].each do |f|
+        [:user, :object, :verb].each do |f|
           raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
+          next if string[f.to_s].is_a?(String) or string[f.to_s].is_a?(Symbol)
           string["#{f}_object"] = string[f.to_s].class.to_s
           string["#{f}_id"] = string[f.to_s].id.to_s
           string.delete f.to_s

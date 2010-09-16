@@ -48,7 +48,8 @@ describe Redline::Timeline::Object do
   def valid_log
     {
       :object => TestingTimelineObject.new(42),
-      :user => User.new(1)
+      :user => User.new(1),
+      :verb => :created
     }
   end
 end

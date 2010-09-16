@@ -16,7 +16,7 @@ describe Redline::Entry do
   end
   
   describe 'when initializing with a string' do
-    [:object_object, :object_id, :user_object, :user_id].each do |f|
+    [:object_object, :object_id, :user_object, :user_id, :verb].each do |f|
       it "should require a #{f}" do
         c = valid_json
         c.delete f
@@ -33,7 +33,7 @@ describe Redline::Entry do
   end
   
   describe 'when initializing with a hash' do
-    [:object, :user].each do |f|
+    [:object, :user, :verb].each do |f|
       it "should require a #{f}" do
         c = valid_hash
         c.delete f
@@ -63,7 +63,8 @@ describe Redline::Entry do
   def valid_hash
     {
       :object => TestingTimelineObject.new(42),
-      :user => User.new(1)
+      :user => User.new(1),
+      :verb => :created
     }
   end
   
@@ -72,7 +73,8 @@ describe Redline::Entry do
       :object_object => "TestingTimelineObject",
       :object_id => 42,
       :user_object => "User",
-      :user_id => 1
+      :user_id => 1,
+      :verb => :created
     }
   end
 end
