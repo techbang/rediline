@@ -49,6 +49,24 @@ describe Redline::Entry do
     end
   end
   
+  describe 'creation date' do
+    it 'should define the creation date' do
+      #Timecop.freeze(Time.now) do
+        entry = Redline::Entry.new valid_hash
+        entry.created_at.should eql(Time.now.utc.to_s)
+      #end
+    end
+    
+    it 'should be possible to define our own creation date' do
+      #Timecop.freeze(Time.now) do
+        c = valid_hash
+        c[:created_at] = Date.new(2010, 01, 01).to_s
+        entry = Redline::Entry.new c
+        entry.created_at.should eql(Date.new(2010, 01, 01).to_s)
+      #end
+    end
+  end
+  
   describe 'to_json' do
     it 'should return the attributes in json' do
       entry = Redline::Entry.new valid_hash

@@ -50,6 +50,7 @@ module Redline
           string["#{f}_id"] = string[f.to_s].id.to_s
           string.delete f.to_s
         end
+        string['created_at'] =  string['created_at'].nil? ? Time.now.utc.to_s : string['created_at'].to_s
       end
       
       string
