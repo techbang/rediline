@@ -16,10 +16,10 @@ describe Redline::Entry do
   end
   
   describe 'when initializing with a string' do
-    [:object, :user].each do |f|
+    [:object_object, :object_id, :user_object, :user_id].each do |f|
       it "should require a #{f}" do
         c = valid_json
-        c.delete "#{f}_id".to_sym
+        c.delete f
         lambda do
           Redline::Entry.new c.to_json
         end.should raise_error "invalid content : missing field #{f}"

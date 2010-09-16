@@ -5,7 +5,6 @@ module Redline
   
   class Entry
     attr_reader   :content
-    attr_reader   :object, :user
     
     def initialize(content)
       @content = parse(content)
@@ -16,22 +15,39 @@ module Redline
       @content.to_json
     end
     
+    def user
+      @user ||= content['user_object'].constantize.find(content['user_id'])
+    end
+    def object
+      @object ||= content['object_object'].constantize.find(content['object_id'])
+    end
+    
+    def method_missing(name, *args)
+      return content[name.to_s] if content.include?(name.to_s)
+      super
+    end
+    
+    def respond_to?(name, *args)
+      return true if content.include?(name.to_s)
+      super
+    end
+    
     private
     def parse(string)
       if string.is_a?(String)
         string = JSON.parse(string)
         
-        [:user, :object].each do |f|
-          raise "invalid content : missing field #{f.to_s}" if string["#{f.to_s}_object"].nil? or string["#{f.to_s}_id"].nil?
-          instance_eval "@#{f.to_s} = string['#{f}_object'].constantize.find(string['#{f}_id'])"
+        [:user_id, :user_object, :object_id, :object_object].each do |f|
+          raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
         end
       else
         string.stringify_keys!
+        
         [:user, :object].each do |f|
           raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
-          instance_eval "@#{f.to_s} = string.delete('#{f.to_s}')"
-          instance_eval "string['#{f.to_s}_object'] = @#{f.to_s}.class.to_s"
-          instance_eval "string['#{f.to_s}_id'] = @#{f.to_s}.id.to_s"
+          string["#{f}_object"] = string[f.to_s].class.to_s
+          string["#{f}_id"] = string[f.to_s].id.to_s
+          string.delete f.to_s
         end
       end
       
