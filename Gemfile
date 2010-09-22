@@ -14,5 +14,5 @@ group :test do
   gem "rspec", '~> 2.0.0.beta'
   gem "rspec-rails", '~> 2.0.0.beta'
   gem "mocha", '0.9.8'
-  #gem "timecop"
+  gem "timecop", '0.3.5'
 end

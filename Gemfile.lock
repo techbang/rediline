@@ -35,6 +35,7 @@ GEM
       webrat (>= 0.7.0)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    timecop (0.3.5)
     webrat (0.7.1)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -53,3 +54,4 @@ DEPENDENCIES
   redis-namespace (= 0.10.0)
   rspec (~> 2.0.0.beta)
   rspec-rails (~> 2.0.0.beta)
+  timecop (= 0.3.5)
