@@ -42,14 +42,21 @@ module Redline
         
         [:user, :object, :verb].each do |f|
           raise "invalid content : missing field #{f.to_s}" if string[f.to_s].nil?
-          next if string[f.to_s].is_a?(String) or string[f.to_s].is_a?(Symbol)
-          string["#{f}_object"] = string[f.to_s].class.to_s
-          string["#{f}_id"] = string[f.to_s].id.to_s
-          string.delete f.to_s
         end
         string['created_at'] =  string['created_at'].nil? ? Time.now.utc.to_s : string['created_at'].to_s
+        
+        string.keys.each do |k|
+          next if string[k].is_a?(String) or string[k].is_a?(Symbol)
+          case string[k]
+            when String, Symbol
+              next
+            else
+              string["#{k}_object"] = string[k].class.to_s
+              string["#{k}_id"] = string[k].id.to_s
+              string.delete k.to_s
+          end
+        end
       end
-      
       string
     end
   end
