@@ -8,27 +8,24 @@ module Redline
     
     def initialize(content)
       @content = parse(content)
-      
+      @objects = {}
     end
     
     def to_json
       @content.to_json
     end
     
-    def user
-      @user ||= content['user_object'].constantize.find(content['user_id'])
-    end
-    def object
-      @object ||= content['object_object'].constantize.find(content['object_id'])
-    end
-    
     def method_missing(name, *args)
       return content[name.to_s] if content.include?(name.to_s)
+      if content.include?("#{name.to_s}_object") && content.include?("#{name.to_s}_object")
+        return @objects[name] ||= content["#{name.to_s}_object"].constantize.find(content["#{name.to_s}_id"])
+      end
       super
     end
     
     def respond_to?(name, *args)
       return true if content.include?(name.to_s)
+      return true if content.include?("#{name.to_s}_object") && content.include?("#{name.to_s}_object")
       super
     end
     
