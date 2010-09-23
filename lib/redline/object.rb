@@ -21,6 +21,7 @@ module Redline
     
     module ClassMethods
       def redline(field_name, attrs)
+        attrs.symbolize_keys!
         callback = attrs.delete :when
         
         define_method "redline_#{callback}" do

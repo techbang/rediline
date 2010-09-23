@@ -53,7 +53,7 @@ describe Redline::Entry do
       c[:second_object] = TestingTimelineObject.new(666)
       entry = Redline::Entry.new c
       entry.second_object.should be_kind_of(TestingTimelineObject)
-      entry.second_object.id.should eql('666')
+      entry.second_object.id.should eql(666)
     end
   end
   
