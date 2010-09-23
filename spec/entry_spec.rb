@@ -74,7 +74,7 @@ describe Redline::Entry do
       c = valid_hash
       c[:second_object] = lambda {|o| o.id }
       entry = Redline::Entry.new c
-      c.second_object.should eql('42')
+      entry.second_object.should eql(42)
     end
   end
   

@@ -50,7 +50,7 @@ module Redline
           string[k] = string[k].call(object) if string[k].is_a?(Proc)
           
           case string[k]
-            when String, Symbol
+            when String, Symbol, Numeric
               next
             else
               string[:"#{k}_object"] = string[k].class.to_s
