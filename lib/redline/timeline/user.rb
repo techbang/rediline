@@ -1,10 +1,12 @@
 module Redline
   module Timeline
     class User
-      attr_reader    :field_name, :user
+      attr_reader    :field_name, :user, :block, :lists
 
-      def initialize(field_name, user)
-        @field_name, @user = field_name, user
+      def initialize(field_name, user, block)
+        @field_name, @user, @block = field_name, user
+        @lists = {}
+        instance_eval(&block)
       end
       
       def each(type)
@@ -25,6 +27,10 @@ module Redline
 
       def count(type)
         Redline.redis.llen(key(type))
+      end
+      
+      def list(name, &block)
+        @lists[name] = instance_eval(&block)
       end
       
       private

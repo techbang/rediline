@@ -3,7 +3,25 @@ require 'spec_helper'
 
 describe Redline::Timeline::User do
   before :each do
-    @timeline = Redline::Timeline::User.new :timeline, User.new(1)
+    @timeline = User.new(1).timeline
+  end
+  
+  describe 'lists' do
+    it 'should have defined the egocentric list' do
+      @timeline.lists.should_not be_empty
+    end
+    it 'should have the egocentric list with one user' do
+      @timeline.lists[:egocentric].length.should eql(1)
+    end
+    it 'should have the public list with two users' do
+      @timeline.lists[:public].length.should eql(2)
+    end
+    
+    it 'should be able to add a new list' do
+      @timeline.lists[:testing].should be_nil
+      @timeline.list(:testing) { [user] }
+      @timeline.lists[:testing].should_not be_nil
+    end
   end
   
   describe 'each' do

@@ -5,9 +5,9 @@ module Redline
       model.extend(ClassMethods)
     end
     module ClassMethods
-      def redline(field_name)
+      def redline(field_name, &block)
         define_method field_name.to_sym do
-          Redline::Timeline::User.new field_name.to_sym, self.dup
+          Redline::Timeline::User.new(field_name.to_sym, self, block)
         end
       end
     end
