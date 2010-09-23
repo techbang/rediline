@@ -8,7 +8,7 @@ class TestingTimelineObject
     :verb => :created,
     :when => :after_create
   redline :timeline,
-      :user => :user,
+      :user => lambda {|o| o.user },
       :verb => :destroyed,
       :when => :before_destroy
   
