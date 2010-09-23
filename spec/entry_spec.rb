@@ -69,6 +69,13 @@ describe Redline::Entry do
       entry.second_object.should be_kind_of(TestingTimelineObject)
       entry.second_object.id.should eql('666')
     end
+    
+    it 'should allow us to define an other object as a proc' do
+      c = valid_hash
+      c[:second_object] = lambda {|o| o.id }
+      entry = Redline::Entry.new c
+      c.second_object.should eql('42')
+    end
   end
   
   describe 'creation date' do

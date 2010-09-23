@@ -45,8 +45,10 @@ module Redline
         end
         string[:created_at] =  string[:created_at].nil? ? Time.now.utc.to_s : string[:created_at].to_s
         
+        object = string[:object]
         string.keys.each do |k|
-          next if string[k].is_a?(String) or string[k].is_a?(Symbol)
+          string[k] = string[k].call(object) if string[k].is_a?(Proc)
+          
           case string[k]
             when String, Symbol
               next
