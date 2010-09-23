@@ -40,6 +40,8 @@ module Redline
               redline_insert! entry, redline_key(field_name, entry, k, user)
             end
           end
+          
+          true
         end
         send(callback, "redline_#{callback}")
       end
