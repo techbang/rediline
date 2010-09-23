@@ -36,6 +36,14 @@ describe Redline::Timeline::User do
         entry.should be_kind_of(Redline::Entry)
       end
     end
+    
+    [:object, :user].each do |o|
+      it "should not have any #{o} in it\'s values" do
+        @timeline.each(:egocentric) do |entry|
+          entry.content[o].should be_nil
+        end
+      end
+    end
   end
   
   describe 'to_a' do

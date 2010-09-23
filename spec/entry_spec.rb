@@ -30,6 +30,13 @@ describe Redline::Entry do
         entry.send(f).should_not be_nil
       end
     end
+    
+    [:object, :user].each do |o|
+      it "should not have any #{o} object in its content" do
+        entry = Redline::Entry.new valid_json.to_json
+        entry.content[o].should be_nil
+      end
+    end
   end
   
   describe 'when initializing with a hash' do
@@ -48,12 +55,19 @@ describe Redline::Entry do
       end
     end
     
+    [:object, :user].each do |o|
+      it "should not have any #{o} object in its content" do
+        entry = Redline::Entry.new valid_json.to_json
+        entry.content[o].should be_nil
+      end
+    end
+    
     it 'should allow us to define an other object' do
       c = valid_hash
       c[:second_object] = TestingTimelineObject.new(666)
       entry = Redline::Entry.new c
       entry.second_object.should be_kind_of(TestingTimelineObject)
-      entry.second_object.id.should eql(666)
+      entry.second_object.id.should eql('666')
     end
   end
   

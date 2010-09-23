@@ -17,8 +17,8 @@ module Redline
     
     def method_missing(name, *args)
       return content[name] if content.include?(name)
-      if content.include?("#{name}_object") && content.include?("#{name}_object")
-        return @objects[name] ||= content["#{name}_object"].constantize.find(content["#{name}_id"])
+      if content.include?(:"#{name}_object") && content.include?(:"#{name}_object")
+        return @objects[name] ||= content[:"#{name}_object"].constantize.find(content[:"#{name}_id"])
       end
       super
     end
@@ -51,9 +51,9 @@ module Redline
             when String, Symbol
               next
             else
-              string["#{k}_object"] = string[k].class.to_s
-              string["#{k}_id"] = string[k].id.to_s
-              string.delete k.to_s
+              string[:"#{k}_object"] = string[k].class.to_s
+              string[:"#{k}_id"] = string[k].id.to_s
+              string.delete k
           end
         end
       end
