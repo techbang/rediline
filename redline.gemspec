@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Damien MATHIEU"]
-  s.date = %q{2010-09-14}
+  s.date = %q{2010-09-23}
   s.description = %q{Timeline library}
   s.email = %q{42@dmathieu.com}
   s.extra_rdoc_files = [
@@ -29,7 +29,6 @@ Gem::Specification.new do |s|
      "lib/redline/object.rb",
      "lib/redline/redis.rb",
      "lib/redline/timeline.rb",
-     "lib/redline/timeline/object.rb",
      "lib/redline/timeline/user.rb",
      "lib/redline/user.rb",
      "redline.gemspec",
@@ -39,7 +38,6 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb",
      "spec/support/timeline.rb",
      "spec/support/user.rb",
-     "spec/timeline/object_spec.rb",
      "spec/timeline/user_spec.rb",
      "spec/timeline_spec.rb",
      "spec/user_spec.rb"
@@ -56,7 +54,6 @@ Gem::Specification.new do |s|
      "spec/spec_helper.rb",
      "spec/support/timeline.rb",
      "spec/support/user.rb",
-     "spec/timeline/object_spec.rb",
      "spec/timeline/user_spec.rb",
      "spec/timeline_spec.rb",
      "spec/user_spec.rb"
