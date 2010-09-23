@@ -25,17 +25,22 @@ module Redline
         callback = attrs.delete :when
         
         define_method "redline_#{callback}" do
-          attrs[:object] = self
-          case attrs[:user]
-            when Symbol, String
-              attrs[:user] = send(attrs[:user])
-            when Proc
-              attrs[:user] = attrs[:user].call(self)
-            when nil
-              attrs[:user] = send(:user)
+          if attrs.frozen?
+            entry = Redline::Entry.new(attrs.dup)
+          else
+            attrs[:object] = self
+            case attrs[:user]
+              when Symbol, String
+                attrs[:user] = send(attrs[:user])
+              when Proc
+                attrs[:user] = attrs[:user].call(self)
+              when nil
+                attrs[:user] = send(:user)
+            end
+            attrs.freeze
+            entry = Redline::Entry.new(attrs.dup)
           end
           
-          entry = Redline::Entry.new(attrs)
           entry.user.send(field_name).lists.each_pair do |k, v|
             v.each do |user|
               redline_insert! entry, redline_key(field_name, entry, k, user)
