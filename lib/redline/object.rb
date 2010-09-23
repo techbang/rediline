@@ -26,7 +26,7 @@ module Redline
         define_method "redline_#{callback}" do
           attrs[:object] = self
           case attrs[:user]
-            when Symbol
+            when Symbol, String
               attrs[:user] = send(attrs[:user])
             when Proc
               attrs[:user] = attrs[:user].call(self)
