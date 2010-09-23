@@ -1,7 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
     activesupport (3.0.0)
+    builder (2.1.2)
     diff-lcs (1.1.2)
     gemcutter (0.6.1)
     git (1.2.5)
@@ -45,7 +50,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (= 3.0.0)
+  activemodel (~> 3.0.0)
+  activesupport (~> 3.0.0)
   i18n
   jeweler
   json

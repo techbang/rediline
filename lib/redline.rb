@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'active_model'
+
 require 'redis/namespace'
 require 'redline/redis'
 require 'redline/entry'
