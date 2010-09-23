@@ -5,7 +5,7 @@ class User
       [user]
     end
     list :public do
-      [User.new(1), User.new(2)]
+      [User.new(15), User.new(16)]
     end
   end
   
