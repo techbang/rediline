@@ -24,16 +24,42 @@ describe Redline::Object do
     
     it 'should add the log for the egocentric list' do
       length = User.new(1).timeline.count(:egocentric)
-      @object.redline_after_create
+      @object.send("redline_#{c}".to_sym)
       User.new(1).timeline.count(:egocentric).should eql(length + 1)
     end
     
     it 'should add the logs for the public list' do
       length1 = User.new(15).timeline.count(:public)
       length2 = User.new(16).timeline.count(:public)
-      @object.redline_after_create
+      @object.send("redline_#{c}".to_sym)
       User.new(15).timeline.count(:public).should eql(length1 + 1)
       User.new(16).timeline.count(:public).should eql(length2 + 1)
+    end
+    
+    describe 'not default user field' do
+      before :each do
+        @object = TestingTimelineObjectWithOwner.new(1, User.new(1))
+      end
+      
+      it 'should not fail to call the callback' do
+        lambda do
+          @object.send("redline_#{c}".to_sym)
+        end
+      end
+      
+      it 'should add the log for the egocentric list' do
+        length = User.new(1).timeline.count(:egocentric)
+        @object.send("redline_#{c}".to_sym)
+        User.new(1).timeline.count(:egocentric).should eql(length + 1)
+      end
+
+      it 'should add the logs for the public list' do
+        length1 = User.new(15).timeline.count(:public)
+        length2 = User.new(16).timeline.count(:public)
+        @object.send("redline_#{c}".to_sym)
+        User.new(15).timeline.count(:public).should eql(length1 + 1)
+        User.new(16).timeline.count(:public).should eql(length2 + 1)
+      end
     end
   end
   
