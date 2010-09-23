@@ -6,9 +6,10 @@ module Redline
       
       model.class_eval do
         private
-        def redline_key(field_name, entry, type)
+        def redline_key(field_name, entry, type, user=nil)
           raise "no entry provided" if entry.nil?
-          "#{field_name.to_s}:#{entry.user.class.to_s}.#{entry.user.id.to_s}:#{type}"
+          user = entry.user if user.nil?
+          "#{field_name.to_s}:#{user.class.to_s}.#{user.id.to_s}:#{type}"
         end
 
         def redline_insert!(entry, key)
@@ -34,7 +35,11 @@ module Redline
           end
           
           entry = Redline::Entry.new(attrs)
-          redline_insert! entry, redline_key(field_name, entry, :egocentric)
+          entry.user.send(field_name).lists.each_pair do |k, v|
+            v.each do |user|
+              redline_insert! entry, redline_key(field_name, entry, k, user)
+            end
+          end
         end
         send(callback, "redline_#{callback}")
       end

@@ -27,6 +27,10 @@ describe Redline::Object do
     it 'should return the timeline\'s key' do
       @object.send(:redline_key, :timeline, @entry, :egocentric).should eql('timeline:User.1:egocentric')
     end
+    
+    it 'should define a different user' do
+      @object.send(:redline_key, :timeline, @entry, :egocentric, User.new(15)).should eql('timeline:User.15:egocentric')
+    end
   end
   
   describe 'redline_insert!' do
