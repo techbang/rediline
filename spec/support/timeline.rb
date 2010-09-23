@@ -1,13 +1,13 @@
 class TestingTimelineObject
   extend ActiveModel::Callbacks
   define_model_callbacks :create, :destroy
-  include Redline::Object
+  include Rediline::Object
   
-  redline :timeline,
+  rediline :timeline,
     :user => :user,
     :verb => :created,
     :when => :after_create
-  redline :timeline,
+  rediline :timeline,
       :user => lambda {|o| o.user },
       :verb => :destroyed,
       :when => :before_destroy

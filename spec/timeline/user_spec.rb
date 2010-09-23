@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe Redline::Timeline::User do
+describe Rediline::Timeline::User do
   before :each do
     @timeline = User.new(1).timeline
   end
@@ -33,7 +33,7 @@ describe Redline::Timeline::User do
     
     it 'should loop through the list' do
       @timeline.each(:egocentric) do |entry|
-        entry.should be_kind_of(Redline::Entry)
+        entry.should be_kind_of(Rediline::Entry)
       end
     end
     
@@ -52,7 +52,7 @@ describe Redline::Timeline::User do
     end
     it 'should have the entries' do
       @timeline.to_a(:egocentric).each do |entry|
-        entry.should be_kind_of(Redline::Entry)
+        entry.should be_kind_of(Rediline::Entry)
       end
     end
   end

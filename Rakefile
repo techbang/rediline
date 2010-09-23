@@ -16,11 +16,11 @@ RSpec::Core::RakeTask.new(:spec)
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "redline"
+    gemspec.name = "rediline"
     gemspec.summary = "Redis Backed Timeline"
     gemspec.description = "Timeline library"
     gemspec.email = "42@dmathieu.com"
-    gemspec.homepage = "http://github.com/dmathieu/redline"
+    gemspec.homepage = "http://github.com/dmathieu/rediline"
     gemspec.authors = ["Damien MATHIEU"]
     
     gemspec.add_dependency "redis", '2.0.7'

@@ -1,13 +1,13 @@
 class TestingTimelineObjectWithOwner
   extend ActiveModel::Callbacks
   define_model_callbacks :create, :destroy
-  include Redline::Object
+  include Rediline::Object
   
-  redline :timeline,
+  rediline :timeline,
     :user => :owner,
     :verb => :created,
     :when => :after_create
-  redline :timeline,
+  rediline :timeline,
       :user => :owner,
       :verb => :created,
       :when => :before_destroy

@@ -1,6 +1,6 @@
 class User
-  include Redline::User
-  redline :timeline do
+  include Rediline::User
+  rediline :timeline do
     list :egocentric do
       [user]
     end

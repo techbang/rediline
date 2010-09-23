@@ -1,7 +1,7 @@
 require 'json'
 require 'active_support/core_ext'
 
-module Redline
+module Rediline
   
   class Entry
     attr_reader   :content

@@ -1,37 +1,37 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe Redline::Object do
+describe Rediline::Object do
   before :each do
     @object = TestingTimelineObject.new(1, User.new(1))
-    @entry = Redline::Entry.new(valid_log)
+    @entry = Rediline::Entry.new(valid_log)
   end
   
-  it 'should have the redline method' do
-    TestingTimelineObject.respond_to?(:redline).should be_true
+  it 'should have the rediline method' do
+    TestingTimelineObject.respond_to?(:rediline).should be_true
   end
   
   [:after_create, :before_destroy].each do |c|
     it "should create the #{c} callback" do
-      @object.respond_to?("redline_#{c}".to_sym).should be_true
+      @object.respond_to?("rediline_#{c}".to_sym).should be_true
     end
     
     it 'should not fail to call the callback' do
       lambda do
-        @object.send("redline_#{c}".to_sym)
+        @object.send("rediline_#{c}".to_sym)
       end.should_not raise_error
     end
     
     it 'should add the log for the egocentric list' do
       length = User.new(1).timeline.count(:egocentric)
-      @object.send("redline_#{c}".to_sym)
+      @object.send("rediline_#{c}".to_sym)
       User.new(1).timeline.count(:egocentric).should eql(length + 1)
     end
     
     it 'should add the logs for the public list' do
       length1 = User.new(15).timeline.count(:public)
       length2 = User.new(16).timeline.count(:public)
-      @object.send("redline_#{c}".to_sym)
+      @object.send("rediline_#{c}".to_sym)
       User.new(15).timeline.count(:public).should eql(length1 + 1)
       User.new(16).timeline.count(:public).should eql(length2 + 1)
     end
@@ -43,49 +43,49 @@ describe Redline::Object do
       
       it 'should not fail to call the callback' do
         lambda do
-          @object.send("redline_#{c}".to_sym)
+          @object.send("rediline_#{c}".to_sym)
         end
       end
       
       it 'should add the log for the egocentric list' do
         length = User.new(1).timeline.count(:egocentric)
-        @object.send("redline_#{c}".to_sym)
+        @object.send("rediline_#{c}".to_sym)
         User.new(1).timeline.count(:egocentric).should eql(length + 1)
       end
 
       it 'should add the logs for the public list' do
         length1 = User.new(15).timeline.count(:public)
         length2 = User.new(16).timeline.count(:public)
-        @object.send("redline_#{c}".to_sym)
+        @object.send("rediline_#{c}".to_sym)
         User.new(15).timeline.count(:public).should eql(length1 + 1)
         User.new(16).timeline.count(:public).should eql(length2 + 1)
       end
     end
   end
   
-  describe 'redline_key' do
+  describe 'rediline_key' do
     it 'should return the timeline\'s key' do
-      @object.send(:redline_key, :timeline, @entry, :egocentric).should eql('timeline:User.1:egocentric')
+      @object.send(:rediline_key, :timeline, @entry, :egocentric).should eql('timeline:User.1:egocentric')
     end
     
     it 'should define a different user' do
-      @object.send(:redline_key, :timeline, @entry, :egocentric, User.new(15)).should eql('timeline:User.15:egocentric')
+      @object.send(:rediline_key, :timeline, @entry, :egocentric, User.new(15)).should eql('timeline:User.15:egocentric')
     end
   end
   
-  describe 'redline_insert!' do
+  describe 'rediline_insert!' do
     it 'should delete the key if it was not a list' do
-      Redline.redis.set "testing", "string key"
+      Rediline.redis.set "testing", "string key"
       lambda do
-        @object.send(:redline_insert!, {:test => true}, "testing")
+        @object.send(:rediline_insert!, {:test => true}, "testing")
       end.should_not raise_error
-      Redline.redis.type("testing").should eql('list')
+      Rediline.redis.type("testing").should eql('list')
     end
 
     it 'should push a new key to the list' do
-      length = Redline.redis.llen("testing")
-      @object.send(:redline_insert!, {:test => true}, "testing")
-      Redline.redis.llen("testing").should eql(length + 1)
+      length = Rediline.redis.llen("testing")
+      @object.send(:rediline_insert!, {:test => true}, "testing")
+      Rediline.redis.llen("testing").should eql(length + 1)
     end
   end
   

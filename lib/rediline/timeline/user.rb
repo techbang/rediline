@@ -1,4 +1,4 @@
-module Redline
+module Rediline
   module Timeline
     class User
       attr_reader    :field_name, :user, :block, :lists
@@ -12,8 +12,8 @@ module Redline
       def each(type)
         raise "you must provide a block" unless block_given?
         (0..count(type)-1).each do |i|
-          data = Redline.redis.lindex(key(type), i)
-          yield Redline::Entry.new(data)
+          data = Rediline.redis.lindex(key(type), i)
+          yield Rediline::Entry.new(data)
         end
       end
 
@@ -26,7 +26,7 @@ module Redline
       end
 
       def count(type)
-        Redline.redis.llen(key(type))
+        Rediline.redis.llen(key(type))
       end
       
       def list(name, &block)

@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{redline}
+  s.name = %q{rediline}
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -24,25 +24,18 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "init.rb",
-     "lib/redline.rb",
-     "lib/redline/entry.rb",
-     "lib/redline/object.rb",
-     "lib/redline/redis.rb",
-     "lib/redline/timeline.rb",
-     "lib/redline/timeline/user.rb",
-     "lib/redline/user.rb",
-     "redline.gemspec",
      "spec/entry_spec.rb",
      "spec/object_spec.rb",
      "spec/redis_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/timeline.rb",
+     "spec/support/timeline_owner.rb",
      "spec/support/user.rb",
      "spec/timeline/user_spec.rb",
      "spec/timeline_spec.rb",
      "spec/user_spec.rb"
   ]
-  s.homepage = %q{http://github.com/dmathieu/redline}
+  s.homepage = %q{http://github.com/dmathieu/rediline}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
@@ -53,6 +46,7 @@ Gem::Specification.new do |s|
      "spec/redis_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/timeline.rb",
+     "spec/support/timeline_owner.rb",
      "spec/support/user.rb",
      "spec/timeline/user_spec.rb",
      "spec/timeline_spec.rb",

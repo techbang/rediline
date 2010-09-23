@@ -1,4 +1,4 @@
-module Redline
+module Rediline
   
   module Redis
     
@@ -12,9 +12,9 @@ module Redline
           host, port, db = server.split(':')
           redis = ::Redis.new(:host => host, :port => port,
             :thread_safe => true, :db => db)
-          @redis = ::Redis::Namespace.new(:redline, :redis => redis)
+          @redis = ::Redis::Namespace.new(:rediline, :redis => redis)
         when ::Redis, ::Redis::Client
-          @redis = ::Redis::Namespace.new(:redline, :redis => server)
+          @redis = ::Redis::Namespace.new(:rediline, :redis => server)
         when ::Redis::Namespace
           @redis = server
         when nil
