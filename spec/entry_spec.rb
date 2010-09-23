@@ -37,6 +37,13 @@ describe Rediline::Entry do
         entry.content[o].should be_nil
       end
     end
+    
+    it 'should not store the queries parameter' do
+      c = valid_json
+      c[:queries] = {}
+      entry = Rediline::Entry.new c.to_json
+      entry.content[:queries].should be_nil
+    end
   end
   
   describe 'when initializing with a hash' do
@@ -76,6 +83,13 @@ describe Rediline::Entry do
       entry = Rediline::Entry.new c
       entry.second_object.should eql(42)
     end
+    
+    it 'should not store the queries parameter' do
+      c = valid_hash
+      c[:queries] = {}
+      entry = Rediline::Entry.new c
+      entry.content[:queries].should be_nil
+    end
   end
   
   describe 'creation date' do
@@ -104,6 +118,19 @@ describe Rediline::Entry do
       valid_json.each_pair do |k, v|
         valid_json[k].to_s.should eql(json[k.to_s])
       end
+    end
+  end
+  
+  describe 'queries' do
+    it 'should allow us to instantiate with a queries object' do
+      lambda do
+        Rediline::Entry.new valid_hash, { :object => lambda {|o, id| o.object.find(id) }}
+      end
+    end
+    
+    it 'should execute the specified query' do
+      entry = Rediline::Entry.new valid_hash, { :object => lambda {|o, id| TestingTimelineObject.new(7) }}
+      entry.object.id.should eql(7)
     end
   end
   

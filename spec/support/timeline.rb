@@ -10,6 +10,11 @@ class TestingTimelineObject
   rediline :timeline,
       :user => lambda {|o| o.user },
       :verb => :destroyed,
+      :queries => {
+        :object => lambda {|o, id|
+          TestingTimelineObject.new(id+1)
+        }
+      },
       :when => :before_destroy
   
   attr_reader   :id, :user

@@ -26,7 +26,7 @@ module Rediline
         
         define_method "rediline_#{callback}" do
           if attrs.frozen?
-            entry = Rediline::Entry.new(attrs.dup)
+            entry = Rediline::Entry.new(attrs.dup, attrs[:queries])
           else
             attrs[:object] = self
             case attrs[:user]
@@ -38,7 +38,7 @@ module Rediline
                 attrs[:user] = send(:user)
             end
             attrs.freeze
-            entry = Rediline::Entry.new(attrs.dup)
+            entry = Rediline::Entry.new(attrs.dup, attrs[:queries])
           end
           
           entry.user.send(field_name).lists.each_pair do |k, v|
