@@ -92,7 +92,7 @@ Rediline has a redis setter which can be given a string or a Redis object.
 This means if you're already using Redis in your app, Rediline can re-use the existing connection.
 
 String: `Rediline.redis = 'localhost:6379'`  
-Redis: `Resque.redis = $redis`
+Redis: `Rediline.redis = $redis`
 
 In a rails app, I have an initializer in `config/initializers/rediline.rb` where I load `config/rediline.yml` and set the redis information appropriately.
 
