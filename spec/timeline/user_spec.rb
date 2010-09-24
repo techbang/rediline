@@ -89,4 +89,19 @@ describe Rediline::Timeline::User do
       @timeline.limit(30).should eql(@timeline)
     end
   end
+  
+  describe 'start_at' do
+    it 'should default the start_at to 0' do
+      @timeline.instance_eval('@start_at').should eql(0)
+    end
+    
+    it 'should redefine the start_at' do
+      @timeline.start_at(20)
+      @timeline.instance_eval('@start_at').should eql(20)
+    end
+    
+    it 'should return self' do
+      @timeline.start_at(30).should eql(@timeline)
+    end
+  end
 end

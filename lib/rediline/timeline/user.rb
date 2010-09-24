@@ -6,13 +6,13 @@ module Rediline
       def initialize(field_name, user, block)
         @field_name, @user, @block = field_name, user
         @lists = {}
-        @limit = 10
+        @limit, @start_at = 10, 0
         instance_eval(&block)
       end
       
       def each(type)
         raise "you must provide a block" unless block_given?
-        (0..@limit).each do |i|
+        (@start_at..@limit).each do |i|
           data = Rediline.redis.lindex(key(type), i)
           next if data.nil?
           yield Rediline::Entry.new(data)
@@ -37,6 +37,11 @@ module Rediline
       
       def limit(count)
         @limit = count
+        self
+      end
+      
+      def start_at(count)
+        @start_at = count
         self
       end
       
