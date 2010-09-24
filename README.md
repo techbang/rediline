@@ -71,7 +71,7 @@ And a "public" one, which will contain all the actions made by this user's frien
 
 You can retrieve a list's actions with the each method.
 
-    User.first.timeline.each(:egocentric) do |action|
+    User.first.timeline.limit(10).each(:egocentric) do |action|
         p action.inspect
     end
 

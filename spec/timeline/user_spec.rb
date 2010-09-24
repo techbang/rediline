@@ -37,6 +37,12 @@ describe Rediline::Timeline::User do
       end
     end
     
+    it 'should not fail if there are not enough entries' do
+      @timeline.limit(@timeline.count(:egocentric) + 1).each(:egocentric) do |entry|
+        entry.should be_kind_of(Rediline::Entry)
+      end
+    end
+    
     [:object, :user].each do |o|
       it "should not have any #{o} in it\'s values" do
         @timeline.each(:egocentric) do |entry|
@@ -66,6 +72,21 @@ describe Rediline::Timeline::User do
   describe 'key' do
     it 'should return the timeline\'s key' do
       @timeline.send(:key, :egocentric).should eql('timeline:User.1:egocentric')
+    end
+  end
+  
+  describe 'limit' do
+    it 'should default the limit to 10' do
+      @timeline.instance_eval('@limit').should eql(10)
+    end
+    
+    it 'should redefine the limit' do
+      @timeline.limit(20)
+      @timeline.instance_eval('@limit').should eql(20)
+    end
+    
+    it 'should return self' do
+      @timeline.limit(30).should eql(@timeline)
     end
   end
 end
