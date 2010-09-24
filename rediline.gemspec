@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Damien MATHIEU"]
-  s.date = %q{2010-09-23}
+  s.date = %q{2010-09-24}
   s.description = %q{Timeline library}
   s.email = %q{42@dmathieu.com}
   s.extra_rdoc_files = [
@@ -70,20 +70,23 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<redis-namespace>, ["= 0.10.0"])
       s.add_runtime_dependency(%q<json>, [">= 0"])
       s.add_runtime_dependency(%q<i18n>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, ["= 3.0.0"])
+      s.add_runtime_dependency(%q<activesupport>, ["~> 3.0"])
+      s.add_runtime_dependency(%q<activemodel>, ["~> 3.0"])
     else
       s.add_dependency(%q<redis>, ["= 2.0.7"])
       s.add_dependency(%q<redis-namespace>, ["= 0.10.0"])
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<i18n>, [">= 0"])
-      s.add_dependency(%q<activesupport>, ["= 3.0.0"])
+      s.add_dependency(%q<activesupport>, ["~> 3.0"])
+      s.add_dependency(%q<activemodel>, ["~> 3.0"])
     end
   else
     s.add_dependency(%q<redis>, ["= 2.0.7"])
     s.add_dependency(%q<redis-namespace>, ["= 0.10.0"])
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<i18n>, [">= 0"])
-    s.add_dependency(%q<activesupport>, ["= 3.0.0"])
+    s.add_dependency(%q<activesupport>, ["~> 3.0"])
+    s.add_dependency(%q<activemodel>, ["~> 3.0"])
   end
 end
 

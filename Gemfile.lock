@@ -50,8 +50,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel (~> 3.0.0)
-  activesupport (~> 3.0.0)
+  activemodel (~> 3.0)
+  activesupport (~> 3.0)
   i18n
   jeweler
   json
