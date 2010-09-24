@@ -27,8 +27,12 @@ begin
     gemspec.add_dependency "redis-namespace", '0.10.0'
     gemspec.add_dependency "json"
     gemspec.add_dependency "i18n"
-    gemspec.add_dependency "activesupport", "~> 3.0"
-    gemspec.add_dependency "activemodel",   "~> 3.0"
+    
+    #
+    # About the version required there, please see the "compatibility" section in the README
+    #
+    gemspec.add_dependency "activesupport", ">= 2"
+    #gemspec.add_dependency "activemodel",   "~> 3.0"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"

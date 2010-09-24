@@ -51,7 +51,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemodel (~> 3.0)
-  activesupport (~> 3.0)
+  activesupport (>= 2)
   i18n
   jeweler
   json

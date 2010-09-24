@@ -4,8 +4,12 @@ gem "redis", '2.0.7'
 gem "redis-namespace", '0.10.0'
 gem "json"
 gem "i18n"
-gem "activesupport", "~> 3.0"
-gem "activemodel", '~> 3.0'
+
+#
+# About the version required there, please see the "compatibility" section in the README
+#
+gem "activesupport", ">= 2"
+gem "activemodel",   "~> 3.0"
 
 group :development do
   gem "jeweler"
