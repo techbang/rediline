@@ -54,12 +54,14 @@ describe Rediline::Timeline::User do
   
   describe 'destroy' do
     it 'should destroy all the user\'s lists keys' do
-      Rediline.redis.expects(:del).twice
+      Rediline.redis.expects(:del).with("timeline:User.1:egocentric")
+      Rediline.redis.expects(:del).with("timeline:User.1:public")
       @timeline.destroy
     end
     
     it 'should destroy the timelines when destroying the user' do
-      Rediline.redis.expects(:del).twice
+      Rediline.redis.expects(:del).with("timeline:User.1:egocentric")
+      Rediline.redis.expects(:del).with("timeline:User.1:public")
       User.new(1).destroy
     end
   end

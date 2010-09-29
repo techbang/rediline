@@ -10,6 +10,7 @@ module Rediline
           Rediline::Timeline::User.new(field_name.to_sym, self, block)
         end
         
+        after_destroy "delete_rediline_#{field_name}"
         private
         define_method "delete_rediline_#{field_name}" do
           send(field_name).destroy

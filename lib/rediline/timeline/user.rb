@@ -20,7 +20,7 @@ module Rediline
       end
       
       def destroy
-        lists.each do |l|
+        lists.keys.each do |l|
           Rediline.redis.del key(l)
         end
       end
