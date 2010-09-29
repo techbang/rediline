@@ -52,6 +52,13 @@ describe Rediline::Timeline::User do
     end
   end
   
+  describe 'destroy' do
+    it 'should destroy all the user\'s lists keys' do
+      Rediline.redis.expects(:del).twice
+      @timeline.destroy
+    end
+  end
+  
   describe 'to_a' do
     it 'should return an array' do
       @timeline.to_a(:egocentric).should be_kind_of(Array)

@@ -18,6 +18,12 @@ module Rediline
           yield Rediline::Entry.new(data)
         end
       end
+      
+      def destroy
+        lists.each do |l|
+          Rediline.redis.del key(l)
+        end
+      end
 
       def to_a(type)
         result = Array.new
