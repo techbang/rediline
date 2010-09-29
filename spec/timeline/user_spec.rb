@@ -57,6 +57,11 @@ describe Rediline::Timeline::User do
       Rediline.redis.expects(:del).twice
       @timeline.destroy
     end
+    
+    it 'should destroy the timelines when destroying the user' do
+      Rediline.redis.expects(:del).twice
+      User.new(1).destroy
+    end
   end
   
   describe 'to_a' do
